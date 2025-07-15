@@ -1,5 +1,6 @@
 import os
 import json
+import tempfile
 from uuid import uuid4
 from typing import Dict, List
 from langchain_community.document_loaders import PyPDFLoader, Docx2txtLoader, TextLoader
@@ -7,6 +8,7 @@ from langchain_core.messages import HumanMessage
 from dotenv import load_dotenv
 load_dotenv()
 
+UPLOAD_DIR = tempfile.mkdtemp()
 
 DOC_DIR = "documents"
 os.makedirs(DOC_DIR, exist_ok=True)
