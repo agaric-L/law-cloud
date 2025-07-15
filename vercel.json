@@ -6,17 +6,14 @@
       "use": "@vercel/python",
       "config": {
         "runtime": "python3.9",
-        "installCommand": "pip install --upgrade pip && pip install fastapi python-multipart uvicorn"
+        "includeFiles": ["app/**"],
+        "installCommand": "pip install fastapi python-multipart"
       }
     }
   ],
   "routes": [
     {
       "src": "/api/(.*)",
-      "dest": "api/main.py"
-    },
-    {
-      "src": "/(.*)",
       "dest": "api/main.py"
     }
   ]
