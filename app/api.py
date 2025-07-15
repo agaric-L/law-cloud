@@ -128,11 +128,14 @@ def generate_defense(request: LawsuitRequest):
 @router.post("/smart_contracts/upload/")
 async def upload_contract_file(file: UploadFile = File(...)):
     try:
-        file_id, file_path = save_upload_file(file)
-        return {"file_id": file_id, "file_name": file.filename, "file_path": file_path}
+        # 直接处理文件内容
+        content = await file.read()
+        return {
+            "filename": file.filename,
+            "size": len(content)
+        }
     except Exception as e:
-        raise HTTPException(status_code=500, detail=f"文件上传失败: {str(e)}")
-
+        raise HTTPException(status_code=500, detail=str(e))
 @router.post("/smart_contracts/analyze_contract/")
 async def analyze_contract(file: UploadFile = File(...)):
     # 保存文件
