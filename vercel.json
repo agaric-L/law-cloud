@@ -6,21 +6,18 @@
       "use": "@vercel/python",
       "config": {
         "runtime": "python3.9",
-        "installCommand": "pip install --upgrade pip && pip install -r requirements.txt python-multipart",
-        "includeFiles": ["api/**", "services/**", "models/**"]
+        "installCommand": "pip install --upgrade pip && pip install fastapi python-multipart uvicorn"
       }
     }
   ],
   "routes": [
     {
       "src": "/api/(.*)",
-      "dest": "api/main.py",
-      "methods": ["GET", "POST", "PUT", "DELETE"]
+      "dest": "api/main.py"
     },
     {
       "src": "/(.*)",
-      "dest": "api/main.py",
-      "status": 404
+      "dest": "api/main.py"
     }
   ]
 }
