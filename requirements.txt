@@ -1,8 +1,9 @@
 fastapi
 uvicorn
-langchain
 pydantic
 openai
-httpx
-requests
-sqlite-utils
+python-dotenv
+langchain
+langchain-community
+langchain-core
+langchain-openai
