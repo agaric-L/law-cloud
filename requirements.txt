@@ -8,4 +8,3 @@ langchain-community
 langchain-core
 langchain-openai
 python-multipart
-tempfile
