@@ -5,9 +5,9 @@
       "src": "api/main.py",
       "use": "@vercel/python",
       "config": {
-        "runtime": "python3.9",
+        "runtime": "python3.12",
         "includeFiles": ["app/**"],
-        "installCommand": "pip install fastapi python-multipart"
+        "installCommand": "pip install --disable-pip-version-check -r requirements.txt"  // 安装 requirements.txt 中的所有依赖
       }
     }
   ],
