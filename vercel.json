@@ -7,8 +7,7 @@
       "config": {
         "runtime": "python3.12",
         "includeFiles": ["app/**"],
-        "installCommand": "pip install --disable-pip-version-check -r requirements.txt"  // 安装 requirements.txt 中的所有依赖
-      }
+        "installCommand": "pip install --disable-pip-version-check -r requirements.txt"
     }
   ],
   "routes": [
