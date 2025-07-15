@@ -7,10 +7,8 @@ from langchain_core.messages import HumanMessage
 from dotenv import load_dotenv
 load_dotenv()
 
-UPLOAD_DIR = "uploads"
-DOC_DIR = "documents"
 
-os.makedirs(UPLOAD_DIR, exist_ok=True)
+DOC_DIR = "documents"
 os.makedirs(DOC_DIR, exist_ok=True)
 
 import os
@@ -25,14 +23,14 @@ MODEL_CONFIG = {
     }
 }
 
-def save_upload_file(file, upload_dir=UPLOAD_DIR):
-    """保存上传文件到指定目录，保留原始后缀，返回文件路径和文件ID"""
-    file_id = str(uuid4())
-    file_extension = os.path.splitext(file.filename)[1]
-    file_path = os.path.join(upload_dir, f"{file_id}{file_extension}")
-    with open(file_path, "wb") as f:
-        f.write(file.file.read())
-    return file_id, file_path
+def save_upload_file(file):
+    # 直接处理文件内容，不保存到磁盘
+    file_content = file.file.read()
+    return {
+        "filename": file.filename,
+        "content": file_content.decode("utf-8"),
+        "size": len(file_content)
+    }
 
 def extract_contract_content(file_path: str) -> str:
     """根据文件类型提取合同文本内容，txt自动检测编码"""
