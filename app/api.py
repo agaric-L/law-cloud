@@ -17,12 +17,12 @@ document_service = DocumentService()
 #     # 调用 langchain_service 的功能
 #     return some_langchain_function()
 
-@router.post("/reset_ai_memory")
+@router.post("/api/reset_ai_memory")
 async def reset_ai_memory():
     reset_ai_legal_memory()
     return {"msg": "memory reset"}
 
-@router.post("/ai_legal_qa")
+@router.post("/api/ai_legal_qa")
 def ai_legal_qa(
     question: str = Body(..., embed=True),
     model: str = Body('qwen-turbo', embed=True),
@@ -30,7 +30,7 @@ def ai_legal_qa(
     print(f"接收到的参数: question={question}, model={model}")
     return ai_legal_qa_function(question, model)
 
-@router.post("/generate_lawsuit")
+@router.post("/api/generate_lawsuit")
 def generate_lawsuit(request: LawsuitRequest):
     """
     生成民事起诉状
@@ -75,7 +75,7 @@ def generate_lawsuit(request: LawsuitRequest):
             "error": str(e)
         }
 
-@router.post("/generate_defense")
+@router.post("/api/generate_defense")
 def generate_defense(request: LawsuitRequest):
     """
     生成民事答辩状
@@ -125,7 +125,7 @@ def generate_defense(request: LawsuitRequest):
 #     from app.services.langchain_service import get_history
 #     return get_history(session_id)
 
-@router.post("/smart_contracts/upload/")
+@router.post("/api/smart_contracts/upload/")
 async def upload_contract_file(file: UploadFile = File(...)):
     try:
         # 直接处理文件内容
@@ -136,10 +136,10 @@ async def upload_contract_file(file: UploadFile = File(...)):
         }
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
-@router.post("/smart_contracts/analyze_contract/")
+@router.post("/api/smart_contracts/analyze_contract/")
 async def analyze_contract(file: UploadFile = File(...)):
     # 保存文件
-    file_id, file_path = save_upload_file(file, upload_dir="documents")
+    file_id, file_path = save_upload_file(file)
     # 提取内容
     content = extract_contract_content(file_path)
     # 调用大模型分析
