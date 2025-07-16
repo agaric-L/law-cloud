@@ -6,15 +6,39 @@
       "use": "@vercel/python",
       "config": {
         "runtime": "python3.12",
-        "includeFiles": ["app/**"],
+        "includeFiles": ["app/**", "*.html", "*.css", "*.js", "*.png"], 
         "installCommand": "pip install --disable-pip-version-check -r requirements.txt"
       }
-    } 
+    },
+    {
+      "src": "*.html",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "*.css",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "*.js",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "*.png",
+      "use": "@vercel/static"
+    }
   ],
   "routes": [
     {
+      "src": "/(.*\\.(html|css|js|png))$",
+      "dest": "/$1" 
+    },
+    {
       "src": "/api/(.*)",
       "dest": "api/main.py"
+    },
+    {
+      "src": "/",
+      "dest": "index.html"
     }
   ]
 }
